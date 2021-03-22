@@ -1,0 +1,13 @@
+[Unit]
+Description=Activity Watcher Service
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/usr/bin/flock -n -E 0 -x /tmp/activity_watcher.lock /usr/bin/activity_watcher
+
+[Install]
+WantedBy=multi-user.target
